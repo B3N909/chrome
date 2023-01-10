@@ -1,0 +1,24 @@
+{
+  "name": "@savant/chrome",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/B3N909/savant-chrome.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/B3N909/savant-chrome/issues"
+  },
+  "homepage": "https://github.com/B3N909/savant-chrome#readme",
+  "dependencies": {
+    "@savant/chromes-edge": "^1.0.5",
+    "@savant/ws-middleware": "^1.0.3"
+  }
+}
