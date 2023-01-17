@@ -46,11 +46,10 @@ module.exports = (API_KEY) => {
         "_spawn": {
             args: [],
         }
-    }, "ws://localhost:3000?api_key=" + API_KEY);
+    }, "wss://chrome-core-run-t36s5o43da-uc.a.run.app/?apiKey=" + API_KEY);
     Browser.launch = async (options) => {
         const compiledOptions = _compileOptions(options);
         const browser = new Browser(compiledOptions);
-        console.log("HERE");
         await browser._spawn();
         return browser;
     }

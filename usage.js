@@ -1,5 +1,5 @@
 (async () => {
-    const Browser = require("@savant/chrome")("YOUR_API_KEY");
+    const Browser = require("./index.js")("5a5baa80-cb50-4faa-9494-e907fd22ef08");
 
     const browser = await Browser.launch({});
     await browser.goto("google");

@@ -8,16 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/B3N909/savant-chrome.git"
+    "url": "git+https://github.com/B3N909/chrome.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/B3N909/savant-chrome/issues"
+    "url": "https://github.com/B3N909/chrome/issues"
   },
-  "homepage": "https://github.com/B3N909/savant-chrome#readme",
+  "homepage": "https://github.com/B3N909/chrome#readme",
   "dependencies": {
+    "@savant/chrome": "^1.0.2",
     "@savant/ws-middleware": "^1.0.3"
   }
 }
