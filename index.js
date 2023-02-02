@@ -1,4 +1,9 @@
-module.exports = (API_KEY) => {
+// let URL = "https://us-central1-chromesedge.cloudfunctions.net/api";
+// URL = "ws://127.0.0.1:3000";
+
+module.exports = (API_KEY, URL) => {
+    if(!URL) throw new Error("URL is required");
+
     const _compileOptions = (options) => {
         const OTHER_KEY_NAMES = {
             executablePath: ["executable", "exec", "path"],
@@ -26,6 +31,7 @@ module.exports = (API_KEY) => {
                 compiledOptions[key] = DEFAULT_VALUES[key];
             }
         }
+        compiledOptions.args = options.args || [];
         delete compiledOptions.remote;
         return compiledOptions;
     }
@@ -46,7 +52,7 @@ module.exports = (API_KEY) => {
         "_spawn": {
             args: [],
         }
-    }, "wss://chrome-core-run-t36s5o43da-uc.a.run.app/?apiKey=" + API_KEY);
+    }, URL);
     Browser.launch = async (options) => {
         const compiledOptions = _compileOptions(options);
         const browser = new Browser(compiledOptions);
