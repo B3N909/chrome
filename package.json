@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/savannt/chrome#readme",
   "dependencies": {
-    "@savant/chrome": "^1.0.2",
     "@savant/ws-middleware": "^1.0.31"
   }
 }
