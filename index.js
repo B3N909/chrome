@@ -7,20 +7,69 @@ module.exports = (API_KEY, URL) => {
     const { Client } = require("@savant/ws-middleware");
     const Browser = Client({
         "goto": {
-            args: ["string"],
+            args: {
+                url: "string",
+            }
         },
         "click": {
-            args: ["string"],
+            args: {
+                elementName: "string",
+                elementType: {
+                    type: "string",
+                    optional: true,
+                }
+            },
         },
         "type": {
-            args: ["string", "string"],
+            args: [{
+                elementName: "string",
+                elementType: "string",
+                text: "string"
+            }, {
+                elementName: "string",
+                text: "string"
+            }]
+        },
+        "getElement": {
+            description: "Get an element from the page",
+            args: {
+                elementName:"string",
+                elementType: {
+                    type: "string",
+                    optional: true,
+                }
+            }
         },
         "waitForNavigation": {
-            args: [],
+            description: "! *Temporarily* waits for the next page load (or timesout within >500ms)",
+            args: {}
+        },
+        "scrollIntoView": {
+            description: "Scroll the element into view",
+            args: {
+                elementName: "string",
+                elementType: "string"
+            }
         },
         "launch": {
-            args: [],
-        }
+            args: {
+                description: "?.doLog = true to enable verbose logging",
+                options: {
+                    type: "object",
+                    optional: true,
+                }
+            },
+        },
+        "page": { args: {} },
+        "url": {
+            description: "Get the current url of the browser",
+            args: {}
+        },
+        "waitForPortal": {
+            description: "Wait for someone to connect to the browsers web portal",
+            args: {}
+        },
+
     }, URL);
     Browser.launch = async (options) => {
         const browser = new Browser(true);
