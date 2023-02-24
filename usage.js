@@ -1,20 +1,26 @@
-(async () => {
-    const Browser = require("./index.js")("5a5baa80-cb50-4faa-9494-e907fd22ef08", "ws://127.0.0.1:3000");
+// const express = require("express");
+// const app = express();
+// app.get("/api", (req, res) => {
+//     // return json
+//     res.json({
+//         "externalIP": "127.0.0.1",
+//     });
+// });
+// app.listen(3005);
 
-    console.log("Launching...");
+(async () => {
+    const doLogWebSocket = false;
+    const Browser = require("./index.js")("5a5baa80-cb50-4faa-9494-e907fd22ef08", "https://us-central1-chromesedge.cloudfunctions.net/api", doLogWebSocket);
+
     const browser = await Browser.launch({
         doLog: true,
     });
-    // console.log("Launched!");
-    // wait 15s
-    // await new Promise((resolve) => setTimeout(resolve, 15000));
     await browser.goto("google");
+    console.log("Connected!");
 
-    // await browser.goto("youtube");
-    
+    console.log("portal_url", await browser.getPortalURL());
+    await browser.waitForPortal(); // waits for someone to connect to the portal, then continues
 
-    // await browser.type("input[name='q']", "puppeteer");
-    // await browser.click("input[name='btnK']");
-    // await browser.waitForNavigation();
-    console.log("Done!");
+    await browser.goto("yahoo");
+    await browser.log("Went to Yahoo!");
 })();

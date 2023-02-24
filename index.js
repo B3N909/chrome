@@ -1,10 +1,10 @@
 // let URL = "https://us-central1-chromesedge.cloudfunctions.net/api";
 // URL = "ws://127.0.0.1:3000";
 
-module.exports = (API_KEY, URL) => {
+module.exports = (API_KEY, URL, doLog) => {
     if(!URL) throw new Error("URL is required");
 
-    const { Client } = require("@savant/ws-middleware");
+    const { Client, getIP } = require("@savant/ws-middleware")(doLog);
     const Browser = Client({
         "goto": {
             args: {
@@ -69,11 +69,30 @@ module.exports = (API_KEY, URL) => {
             description: "Wait for someone to connect to the browsers web portal",
             args: {}
         },
-
-    }, URL);
+        "log": {
+            description: "Log a message to the browser's web portal",
+            args: {
+                message: "string"
+            }
+        }
+    }, URL, API_KEY);
     Browser.launch = async (options) => {
         const browser = new Browser(true);
         await browser.launch(options);
+
+        browser.getPortalURL = async () => {
+            if(URL.includes("ws://")) {
+                let fakeURL = URL.split("ws://")[1];
+                if(fakeURL.includes(":")) fakeURL = fakeURL.split(":")[0];
+                return "http://" + fakeURL + ":3001";
+            }
+
+            let ip = await getIP();
+            if(ip.includes(":")) ip = ip.split(":")[0];
+
+            return "http://" + ip + ":3001";
+        }
+
         return browser;
     }
     return Browser;
