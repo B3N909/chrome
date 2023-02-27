@@ -2,7 +2,11 @@
 `@savant/chrome` is a library for interacting with Chrome browsers in the cloud.
 
 ## DOM
-The DOM is a little different than what you're used to. Instead of providng direct access to the DOM, we provide two lists of: `inputs` and `buttons`. These lists are populated with the `name` and `value` attributes of the inputs and buttons on the page. You can use these to interact with the page.
+The DOM is auto pruned to only include the following elements:
+  * `buttons`
+  * `inputs`
+  * `links`
+
 
 The DOM can be access by calling
 ```javascript
@@ -70,7 +74,7 @@ await browser.type("Search Input", "puppeteer");
 ## Usage
 ```javascript
 (async () => {
-    const Browser = require("@savant/chrome")("YOUR_API_KEY");
+    const Browser = require("@savant/chrome")("URL", apiKey: "", doLog: true);
 
     const browser = await Browser.launch({});
     await browser.goto("google");

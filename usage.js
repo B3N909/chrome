@@ -1,16 +1,22 @@
-// const express = require("express");
-// const app = express();
-// app.get("/api", (req, res) => {
-//     // return json
-//     res.json({
-//         "externalIP": "127.0.0.1",
-//     });
-// });
-// app.listen(3005);
+const isLocal = false;
+let URL = "https://us-central1-chromesedge.cloudfunctions.net/api"
+
+if(isLocal) {
+    const express = require("express");
+    const app = express();
+    app.get("/api", (req, res) => {
+        // return json
+        res.json({
+            "externalIP": "127.0.0.1",
+        });
+    });
+    app.listen(3005);
+    URL = "http://127.0.0.1:3005/api"
+}
 
 (async () => {
     const doLogWebSocket = false;
-    const Browser = require("./index.js")("5a5baa80-cb50-4faa-9494-e907fd22ef08", "https://us-central1-chromesedge.cloudfunctions.net/api", doLogWebSocket);
+    const Browser = require("./index.js")("5a5baa80-cb50-4faa-9494-e907fd22ef08", URL, doLogWebSocket);
 
     const browser = await Browser.launch({
         doLog: true,
