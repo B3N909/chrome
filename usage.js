@@ -1,4 +1,4 @@
-const isLocal = false;
+const isLocal = true;
 let URL = "https://us-central1-chromesedge.cloudfunctions.net/api"
 
 if(isLocal) {
@@ -23,6 +23,22 @@ if(isLocal) {
     });
     await browser.goto("google");
     console.log("Connected!");
+
+    // wait for 1000ms
+    await browser.wait(1000);
+
+    const page = await browser.page();
+    console.log("page", page);
+
+
+    const evaluatedURL = await browser.evaluate(() => {
+        return new Promise(r => {
+            setTimeout(() => {
+                r(window.location.href);
+            }, 1500);
+        });
+    });
+    console.log("evaluatedURL", evaluatedURL);
 
     console.log("portal_url", await browser.getPortalURL());
     await browser.waitForPortal(); // waits for someone to connect to the portal, then continues

@@ -74,6 +74,24 @@ module.exports = (API_KEY, URL, doLog) => {
             args: {
                 message: "string"
             }
+        },
+        "evaluate": {
+            description: "Evaluate a function in the browser",
+            args: [{
+                func: "function",
+            },
+            {
+                asyncFunc: "function",
+            },
+            {
+                code: "string",
+            }]
+        },
+        "wait": {
+            description: "Wait for a specified amount of time",
+            args: {
+                time: "number"
+            }
         }
     }, URL, API_KEY);
     Browser.launch = async (options) => {
@@ -91,6 +109,11 @@ module.exports = (API_KEY, URL, doLog) => {
             if(ip.includes(":")) ip = ip.split(":")[0];
 
             return "http://" + ip + ":3001";
+        }
+        browser._evaluate = browser.evaluate;
+        browser.evaluate = async (func, ...args) => {
+            const code = `(${func.toString()})(${args.map(arg => JSON.stringify(arg)).join(", ")})`;
+            return await browser._evaluate(code);
         }
 
         return browser;

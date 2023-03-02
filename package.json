@@ -1,6 +1,6 @@
 {
   "name": "@savant/chrome",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/savannt/chrome#readme",
   "dependencies": {
-    "@savant/ws-middleware": "^1.0.34",
+    "@savant/ws-middleware": "^1.0.38",
     "express": "^4.18.2"
   }
 }
